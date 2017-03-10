@@ -1,0 +1,15 @@
+set logfile /var/log/monit.log
+set daemon 10
+set idfile /var/run/monit.id
+set statefile /var/run/monit.state
+
+set httpd port 2812 address 127.0.0.1
+  allow 127.0.0.1
+
+check network eth0 with interface eth0
+  start program = "/sbin/ifup eth0"
+  stop program = "/sbin/ifdown eth0"
+  if failed link then restart
+
+
+

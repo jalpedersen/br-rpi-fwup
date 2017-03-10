@@ -1,0 +1,31 @@
+#!/bin/sh
+wpa_conf=/data/wpa_supplicant.conf
+pid=/var/run/wpa_supplicant.pid
+
+start() {
+    wpa_supplicant -Dnl80211 -iwlan0 -c/data/wpa_supplicant.conf -P $pid -B
+}
+stop() {
+    kill $pid
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        restart
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?

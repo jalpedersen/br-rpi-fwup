@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# monit
+#
+
+chmod 0700 /etc/monitrc
+
+start() {
+        monit
+        sleep 3
+        monit start all
+        monit monitor all
+        echo "OK"
+}
+stop() {
+        monit stop all
+        monit unmonitor all
+        echo "OK"
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        restart
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?

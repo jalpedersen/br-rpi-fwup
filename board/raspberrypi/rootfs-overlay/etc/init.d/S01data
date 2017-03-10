@@ -1,0 +1,62 @@
+#!/bin/sh
+
+dev=/dev/mmcblk0p3
+wpa_conf=/data/wpa_supplicant.conf
+
+mount_data() {
+    mount $dev /data
+    if [ $? -ne 0 ]; then
+        mkfs.ext4 -F $dev
+        mount $dev /data
+        if [ $? -ne 0 ]; then
+            echo "Failed to prepare data partition $dev"
+            exit 1
+        fi
+    fi
+}
+
+gen_ssh_key() {
+    f=/data/ssh/$2
+    if [ ! -f $f ]; then
+        ssh-keygen -t $1 -f $f -N ""
+    fi
+    chmod 0600 $f
+}
+
+init_wpa() {
+    if [ ! -f $wpa_conf ]; then
+        cp /etc/wpa_supplicant.conf $wpa_conf
+    fi
+}
+
+start() {
+    mount_data
+
+    mkdir -p /data/ssh 
+    gen_ssh_key rsa ssh_host_rsa_key
+    gen_ssh_key dsa ssh_host_dsa_key
+    gen_ssh_key ecdsa ssh_host_ecdsa_key
+    gen_ssh_key ed25519 ssh_host_ed25519_key
+}
+stop() {
+    umount /data
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+  	stop
+	start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
