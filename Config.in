@@ -1,0 +1,2 @@
+#source "$BR2_EXTERNAL_FWUP_PATH/package/fwup/Config.in"
+#source "$BR2_EXTERNAL_FWUP_PATH/package/fwup/Config.in.host"
