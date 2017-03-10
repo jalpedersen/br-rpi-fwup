@@ -3,8 +3,6 @@
 # monit
 #
 
-chmod 0700 /etc/monitrc
-
 start() {
         monit
         sleep 3
