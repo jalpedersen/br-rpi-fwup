@@ -3,8 +3,8 @@ set daemon 10
 set idfile /var/run/monit.id
 set statefile /var/run/monit.state
 
-set httpd port 2812 address 127.0.0.1
-  allow 127.0.0.1
+set httpd unixsocket /var/run/monit.sock
+  allow monit:monit
 
 check network eth0 with interface eth0
   start program = "/sbin/ifup eth0"
