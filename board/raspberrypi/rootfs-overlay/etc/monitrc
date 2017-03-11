@@ -7,8 +7,14 @@ set httpd unixsocket /var/run/monit.sock
   allow monit:monit
 
 check network eth0 with interface eth0
-  start program = "/sbin/ifup eth0"
+  start program = "/sbin/ifup -f eth0"
   stop program = "/sbin/ifdown eth0"
+  if failed link then restart
+
+
+check network wlan0 with interface wlan0
+  start program = "/sbin/ifup -f wlan0"
+  stop program = "/sbin/ifdown wlan0"
   if failed link then restart
 
 
