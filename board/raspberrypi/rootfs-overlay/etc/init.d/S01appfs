@@ -2,21 +2,22 @@
 
 dev=/dev/mmcblk0p3
 wpa_conf=/data/wpa_supplicant.conf
+dir=/app
 
-mount_data() {
-    mount $dev /data
+mount_fs() {
+    mount $dev $dir
     if [ $? -ne 0 ]; then
         mkfs.ext4 -F $dev
-        mount $dev /data
+        mount $dev $dir
         if [ $? -ne 0 ]; then
-            echo "Failed to prepare data partition $dev"
+            echo "Failed to prepare app partition $dev"
             exit 1
         fi
     fi
 }
 
 gen_ssh_key() {
-    f=/data/ssh/$2
+    f=$dir/ssh/$2
     if [ ! -f $f ]; then
         ssh-keygen -t $1 -f $f -N ""
     fi
@@ -30,16 +31,16 @@ init_wpa() {
 }
 
 start() {
-    mount_data
+    mount_fs
 
-    mkdir -p /data/ssh 
+    mkdir -p $dir/ssh
     gen_ssh_key rsa ssh_host_rsa_key
     gen_ssh_key dsa ssh_host_dsa_key
     gen_ssh_key ecdsa ssh_host_ecdsa_key
     gen_ssh_key ed25519 ssh_host_ed25519_key
 }
 stop() {
-    umount /data
+    umount $dir
 }
 
 case "$1" in
