@@ -1,7 +1,6 @@
 #!/bin/sh
 
 dev=/dev/mmcblk0p3
-wpa_conf=/data/wpa_supplicant.conf
 dir=/app
 
 mount_fs() {
@@ -22,12 +21,6 @@ gen_ssh_key() {
         ssh-keygen -t $1 -f $f -N ""
     fi
     chmod 0600 $f
-}
-
-init_wpa() {
-    if [ ! -f $wpa_conf ]; then
-        cp /etc/wpa_supplicant.conf $wpa_conf
-    fi
 }
 
 start() {
