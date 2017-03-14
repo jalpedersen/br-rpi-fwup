@@ -4,7 +4,5 @@ iface lo inet loopback
 iface eth0 inet dhcp
 
 iface wlan0 inet dhcp
-	pre-up /usr/bin/wpa_supplicant_helper wlan0 start
-	post-down /usr/bin/wpa_supplicant_helper wlan0 stop
 
 
