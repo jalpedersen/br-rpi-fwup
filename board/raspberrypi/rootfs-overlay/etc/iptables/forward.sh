@@ -4,7 +4,7 @@
 #if the gadget is present at boot.
 
 outside=eth0
-inside1=eth1
+inside1=wlan0
 inside2=usb0
 
 sysctl -w net.ipv4.ip_forward=1
