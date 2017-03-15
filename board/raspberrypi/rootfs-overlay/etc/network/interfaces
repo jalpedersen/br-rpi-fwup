@@ -5,4 +5,7 @@ iface eth0 inet dhcp
 
 iface wlan0 inet dhcp
 
+iface wlan1 inet dhcp
+    pre-up wpa_supplicant -Dnl80211 -iwlan1 -c/data/wpa_supplicant.conf -P/var/run/wpa_supplicant.pid -B
+    post-down kill `cat /var/run/wpa_supplicant.pid`
 

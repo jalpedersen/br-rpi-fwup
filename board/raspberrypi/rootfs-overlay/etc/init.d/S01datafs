@@ -1,7 +1,7 @@
 #!/bin/sh
 
-dev=/dev/mmcblk0p3
-dir=/app
+dev=/dev/mmcblk0p4
+dir=/data
 
 mount_fs() {
     mount $dev $dir
@@ -9,7 +9,7 @@ mount_fs() {
         mkfs.ext4 -F $dev
         mount $dev $dir
         if [ $? -ne 0 ]; then
-            echo "Failed to prepare app partition $dev"
+            echo "Failed to prepare $dev"
             exit 1
         fi
     fi
@@ -23,8 +23,16 @@ gen_ssh_key() {
     chmod 0600 $f
 }
 
+ensure_wpa_supplicant() {
+    if [ ! -f $dir/wpa_supplicant.conf ]; then
+        cp /etc/wpa_supplicant.conf $dir/wpa_supplicant.conf
+    fi
+}
+
 start() {
     mount_fs
+
+    ensure_wpa_supplicant
 
     mkdir -p $dir/ssh
     gen_ssh_key rsa ssh_host_rsa_key
