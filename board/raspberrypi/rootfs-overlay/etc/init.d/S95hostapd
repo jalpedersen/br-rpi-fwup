@@ -5,36 +5,39 @@
 wlan_dev=wlan0
 dev=uap0
 conf=/data/hostapd.conf
+control=/var/run/hostapd
 pid=/var/run/hostapd.pid
 ssid="Pi_`cat /sys/class/net/wlan0/address  | sed s/://g | cut -c1-12`"
 
 start() {
-    iw dev wlan0 interface add uap0 type __ap
+    iw dev $wlan_dev interface add $dev type __ap
+    ifup $dev
     if [ ! -f $conf ]; then
         sed s/RENAME_ME/$ssid/g /etc/hostapd.conf > $conf
     fi
-	hostapd -i$dev -P$pid -B $conf
+    hostapd -i$dev -P$pid -g $control -B $conf
     echo "OK"
 }
 stop() {
-	kill `cat $pid`
+    ifdown $dev
+    kill `cat $pid`
 }
 restart() {
-        stop
-        start
+    stop
+    start
 }
 
 case "$1" in
-  start)
+    start)
         start
         ;;
-  stop)
+    stop)
         stop
         ;;
-  restart|reload)
+    restart|reload)
         restart
         ;;
-  *)
+    *)
         echo "Usage: $0 {start|stop|restart}"
         exit 1
 esac
