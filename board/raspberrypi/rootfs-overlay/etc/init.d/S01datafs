@@ -6,7 +6,7 @@ dir=/data
 mount_fs() {
     mount $dev $dir
     if [ $? -ne 0 ]; then
-        mkfs.ext4 -F $dev
+        mkfs.f2fs -F $dev
         mount $dev $dir
         if [ $? -ne 0 ]; then
             echo "Failed to prepare $dev"
