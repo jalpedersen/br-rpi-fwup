@@ -5,7 +5,9 @@ iface eth0 inet dhcp
 
 iface wlan0 inet dhcp
 
-iface wlan1 inet dhcp
-    pre-up wpa_supplicant -Dnl80211 -iwlan1 -c/data/wpa_supplicant.conf -P/var/run/wpa_supplicant.pid -B
-    post-down kill `cat /var/run/wpa_supplicant.pid`
+iface uap0 inet static
+    address 192.168.42.1
+    netmask 255.255.255.0
+    network 192.168.42.0
+    broadcast 192.168.42.255
 

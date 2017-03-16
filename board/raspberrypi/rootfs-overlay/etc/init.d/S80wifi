@@ -10,12 +10,12 @@ start() {
 	wpa_supplicant -Dnl80211 -i$dev -c$conf -P$pid -B
 	sleep 1
 	ifup wlan0
-        echo "OK"
+    echo "OK"
 }
 stop() {
 	kill `cat $pid`
 	ifdown $dev
-        echo "OK"
+    echo "OK"
 }
 restart() {
         stop
