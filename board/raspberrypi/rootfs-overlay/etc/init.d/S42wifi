@@ -5,34 +5,43 @@
 dev=wlan0
 conf=/data/wpa_supplicant.conf
 pid=/var/run/wpa_supplicant.pid
+control_file=/var/run/wpa_supplicant/$dev
 
 start() {
-	wpa_supplicant -Dnl80211 -i$dev -c$conf -P$pid -B
-	sleep 1
-	ifup wlan0
+    wpa_cli -i$dev ping > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "wpa_supplicant already active on $dev"
+        exit 0
+    fi
+    if [ -f $control_file ]; then
+        rm $control_file
+    fi
+    wpa_supplicant -Dnl80211 -i$dev -c$conf -P$pid -B
+    sleep 1
+    ifup wlan0
     echo "OK"
 }
 stop() {
-	kill `cat $pid`
-	ifdown $dev
+    kill `cat $pid`
+    ifdown $dev
     echo "OK"
 }
 restart() {
-        stop
-        start
+    stop
+    start
 }
 
 case "$1" in
-  start)
+    start)
         start
         ;;
-  stop)
+    stop)
         stop
         ;;
-  restart|reload)
+    restart|reload)
         restart
         ;;
-  *)
+    *)
         echo "Usage: $0 {start|stop|restart}"
         exit 1
 esac

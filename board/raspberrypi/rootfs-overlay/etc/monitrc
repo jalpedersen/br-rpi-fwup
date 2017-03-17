@@ -9,5 +9,14 @@ set httpd unixsocket /var/run/monit.sock
 check filesystem datafs with path /data
   if space usage > 90% then alert
 
+check process runsvdir with pidfile /var/run/runsvdir.pid
+  start program = "/etc/init.d/S92runsvdir start" with timeout 5 seconds
+  stop program = "/etc/init.d/S92runsvdir stop"
 
+check process wpa_supplicant with pidfile /var/run/wpa_supplicant.pid
+  start program = "/etc/init.d/S42wifi start" with timeout 5 seconds
+  stop program = "/etc/init.d/S42wifi stop"
 
+check process hostapd with pidfile /var/run/hostapd.pid
+  start program = "/etc/init.d/S95hostapd start" with timeout 5 seconds
+  stop program = "/etc/init.d/S95hostapd stop"
