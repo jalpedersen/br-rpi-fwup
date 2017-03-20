@@ -97,6 +97,9 @@ linux-menuconfig: buildroot/.config
 	@echo your buildroot configuration to use it.
 	$(MAKE_BR) linux-update-defconfig
 
+source:
+	$(MAKE_BR) source
+
 busybox-menuconfig: buildroot/.config
 	$(MAKE_BR) busybox-menuconfig
 	@echo
