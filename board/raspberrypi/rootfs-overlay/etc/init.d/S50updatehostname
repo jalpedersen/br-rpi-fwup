@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# updatehostname
+#
+wlan_dev=wlan0
+name="Pi_`cat /sys/class/net/$wlan_dev/address  | sed s/://g | cut -c1-12`"
+
+start() {
+    /usr/bin/update-hostname $name
+}
+stop() {
+}
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|reload)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?

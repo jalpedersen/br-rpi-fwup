@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -z $1 ]; then 
+    echo "Usage $0 [hostname]"
+    exit 1
+fi
+
+hostname $1
+avahi-set-host-name $1
