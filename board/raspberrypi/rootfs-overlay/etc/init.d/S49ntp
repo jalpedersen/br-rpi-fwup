@@ -20,6 +20,8 @@ case "$1" in
     [ $? = 0 ] && hwclock -wu
     start-stop-daemon -S -q -x $DAEMON -- -g
     [ $? = 0 ] && echo "OK" || echo "FAIL"
+    echo -n "Current time: "
+    date
     ;;
   stop)
     printf "Stopping $NAME: "
