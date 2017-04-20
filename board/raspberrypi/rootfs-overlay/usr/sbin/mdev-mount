@@ -1,0 +1,27 @@
+#!/bin/sh
+mountdir=/tmp/media
+ext_handler=/app/hotplug/disk
+
+# Do not do anything unless there is a executable handler.
+# We do not want to mount devices without a good way to unmount
+# them again
+[ ! -x $ext_handler ] && exit 0
+
+#We only mount partitions
+[ "x$DEVTYPE" != "xpartition" ] && exit 0
+
+target="$mountdir/$DEVNAME"
+device=$PWD/$DEVNAME
+export TARGET=$target
+
+if [ "x$ACTION" == "xadd" ]; then
+	logger -t auto-mount adding device $device at $target
+	mkdir -p "$target"
+	mount "$device" $target
+	$ext_handler
+elif [ "x$ACTION" == "xremove" ]; then
+	logger -t auto-mount removing device $device from $target
+	umount "$target"
+	rmdir "$target"
+	$ext_handler
+fi
