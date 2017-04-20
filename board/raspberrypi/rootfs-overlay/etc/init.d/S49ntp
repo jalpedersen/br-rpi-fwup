@@ -17,7 +17,7 @@ case "$1" in
   start)
     printf "Starting $NAME: "
     /usr/bin/ntpdate -s $NTP_SERVER
-    [ $? = 0 ] && hwclock -wu
+    [ $? = 0 ] && hwclock_wrapper -wu
     start-stop-daemon -S -q -x $DAEMON -- -g
     [ $? = 0 ] && echo "OK" || echo "FAIL"
     echo -n "Current time: "

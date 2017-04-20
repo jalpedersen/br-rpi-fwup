@@ -8,10 +8,10 @@ case "$1" in
   start)
     modprobe $module
     echo $driver $address > /sys/class/i2c-adapter/i2c-1/new_device
-    hwclock -su
+    hwclock_wrapper -su
     ;;
   stop)
-    hwclock -wu
+    hwclock_wrapper -wu
     ;;
   restart|reload)
     $0 stop

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ -f /dev/misc/rtc ]; then
+    hwclock $*
+    exit $?
+fi
+
+file=/data/last-known-time
+
+if [ "x$1" == "x-su" ]; then
+    date -s @`cat $file`
+elif [ "x$1" == "x-wu" ]; then
+    date +%s > $file
+fi
+
+#now save the time to flash each minute
+killall dummy-timekeeper
+dummy-timekeeper < /dev/null > /dev/null 2>&1 &
