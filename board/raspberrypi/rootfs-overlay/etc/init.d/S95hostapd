@@ -19,7 +19,8 @@ start() {
 }
 stop() {
     ifdown $dev
-    kill `cat $pid`
+    [ ! -f $pid ] && killall hostapd || kill `cat $pid`
+    rm -f $pid
 }
 restart() {
     stop
