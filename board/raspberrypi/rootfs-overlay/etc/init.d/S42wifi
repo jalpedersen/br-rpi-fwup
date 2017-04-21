@@ -8,6 +8,7 @@ pid=/var/run/wpa_supplicant.pid
 control_file=/var/run/wpa_supplicant/$dev
 
 start() {
+    rfkill unblock wifi
     wpa_cli -i$dev ping > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "wpa_supplicant already active on $dev"
