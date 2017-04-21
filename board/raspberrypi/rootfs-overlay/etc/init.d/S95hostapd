@@ -9,6 +9,7 @@ pid=/var/run/hostapd.pid
 ssid="Pi_`cat /sys/class/net/$wlan_dev/address  | sed s/://g | cut -c1-12`"
 
 start() {
+    rfkill unblock wifi
     iw dev $wlan_dev interface add $dev type __ap
     ifup $dev
     if [ ! -f $conf ]; then
