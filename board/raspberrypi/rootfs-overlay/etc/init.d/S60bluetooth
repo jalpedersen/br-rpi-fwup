@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# bluetooth
+#
+
+
+start() {
+    hciattach /dev/ttyAMA0 bcm43xx 921600 noflow -
+    if [ $? -ne 0 ]; then
+	#retry if first attempt fails due to timeout
+        hciattach /dev/ttyAMA0 bcm43xx 921600 noflow -
+    fi
+    hciconfig hci0 up
+    echo "OK"
+}
+stop() {
+    hciconfig hci0 down
+    echo "OK"
+}
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|reload)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
