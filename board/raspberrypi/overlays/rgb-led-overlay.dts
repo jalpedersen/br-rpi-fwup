@@ -1,0 +1,31 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+
+        compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709", "brcm,bcm2710";
+
+        fragment@0 {
+            target = <&leds>;
+            __overlay__ {
+                compatible = "gpio-leds";
+                led_red {
+                    label = "red";
+                    gpios = <&gpio 26 1>;
+                };
+
+                led_green {
+                    label = "green";
+                    gpios = <&gpio 19 1>;
+                    default-state = "on";
+                };
+
+                led_blue {
+                    label = "blue";
+                    gpios = <&gpio 13 1>;
+                };
+
+            };
+        };
+
+};
