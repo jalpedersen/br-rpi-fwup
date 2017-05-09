@@ -1,0 +1,26 @@
+#!/bin/sh
+
+led=/sys/class/leds/led1
+
+start() {
+	echo heartbeat > $led/trigger
+}
+
+stop() {
+	echo input > $led/trigger
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  *)
+	echo "Usage: $0 {start|stop}"
+	exit 1
+esac
+
+exit $?
+
