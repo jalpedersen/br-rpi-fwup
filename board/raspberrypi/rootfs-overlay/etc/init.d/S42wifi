@@ -19,6 +19,7 @@ start() {
     fi
     wpa_supplicant -Dnl80211 -i$dev -c$conf -P$pid -B
     sleep 1
+    wpa_cli -a/etc/network/wpa/change_channel.sh -B
     ifup wlan0
     echo "OK"
 }
