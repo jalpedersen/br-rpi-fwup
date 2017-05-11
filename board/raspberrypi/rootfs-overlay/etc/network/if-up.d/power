@@ -1,0 +1,8 @@
+#!/bin/sh
+#Forcibly turn off power management for wireless devices to avoid common problems
+
+type=`echo $IFACE | cut -c-4`
+
+if [ "x$type" == "xwlan" ]; then
+	iwconfig $IFACE power off
+fi
