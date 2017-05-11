@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# crond
+#
+crontab=/data/crontab
+
+start() {
+    [ ! -f $crontab ] && exit 1
+	mkdir -p /var/spool/cron/crontabs/
+	crontab $crontab
+	crond
+    echo "OK"
+}
+stop() {
+    killall crond
+    echo "OK"
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+esac
+
+exit $?
