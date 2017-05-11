@@ -1,0 +1,36 @@
+#!/bin/sh
+
+get_freq() {
+    #lookup frequency of AP with give SSID with the best signal
+    wpa_cli scan_res | grep $1 | head -n1 | awk '{print $2}'
+}
+
+get_hostapd_freq() {
+    hostapd_cli status | grep freq | cut -c6-
+}
+
+#Check if there is a better network available
+for state in CURRENT TEMP-DISABLED; do
+    ssid=`wpa_cli list_n | grep $state | awk '{print $2}'`
+    if [ ! -z $ssid ]; then
+        freq=`get_freq $ssid`
+        if [ ! -z $freq ]; then
+            ap_freq=`get_hostapd_freq`
+            if [ ! -z $ap_freq ]; then
+                if [ $freq -ne $ap_freq ]; then
+                    change-hostapd-channel $freq     
+                    wpa_cli reconf     
+                    exit 1
+                fi
+            fi
+        fi
+    fi
+done
+
+
+dmesg | grep brcmfmac | tail -n 5 | grep "brcmf_cfg80211_escan: Connecting: status (3)" > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    rmmod brcmfmac
+    modprobe
+    exit 1
+fi
