@@ -1,0 +1,24 @@
+#!/bin/sh
+
+freq=$1
+hostapd_init=/etc/init.d/S95hostapd
+conf=/data/hostapd.conf
+
+freq_to_channel() {
+    #https://en.wikipedia.org/wiki/List_of_WLAN_channels#2.4.C2.A0GHz_.28802.11b.2Fg.2Fn.29
+    if [ $1 -ge 2412 ] && [ $1 -le 2472 ]; then
+        chan=`expr \(  $1 - 2412 \) / 5 + 1`
+        echo $chan
+    fi
+}
+[ -z $freq ] && exit 1
+chan=`freq_to_channel $freq`
+
+if [ ! -z $chan ]; then
+    sed -i s/channel=.*/channel=$chan/g $conf
+    $hostapd_init restart
+else
+    echo "Cannot determine channel for frequency $freq"
+    exit 1
+fi
+
