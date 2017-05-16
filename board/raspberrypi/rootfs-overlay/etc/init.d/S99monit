@@ -2,35 +2,40 @@
 #
 # monit
 #
+alt_conf=/app/etc/monitrc
 
 start() {
+    if [ -f $alt_conf ]; then
+        monit -c $alt_conf
+    else
         monit
-        sleep 3
-        monit start all
-        monit monitor all
-        echo "OK"
+    fi
+    sleep 3
+    monit start all
+    monit monitor all
+    echo "OK"
 }
 stop() {
-        monit stop all
-        monit unmonitor all
-        echo "OK"
+    monit stop all
+    monit unmonitor all
+    echo "OK"
 }
 restart() {
-        stop
-        start
+    stop
+    start
 }
 
 case "$1" in
-  start)
+    start)
         start
         ;;
-  stop)
+    stop)
         stop
         ;;
-  restart|reload)
+    restart|reload)
         restart
         ;;
-  *)
+    *)
         echo "Usage: $0 {start|stop|restart}"
         exit 1
 esac

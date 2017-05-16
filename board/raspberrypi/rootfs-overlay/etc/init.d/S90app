@@ -13,6 +13,7 @@ mount_fs() {
             exit 1
         fi
     fi
+    [ -e $dir/etc/init ] && $dir/etc/init
 }
 
 start() {
