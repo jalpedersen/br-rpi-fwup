@@ -6,7 +6,7 @@ diff -Naur rpi-firmware.orig/rpi-firmware.mk rpi-firmware/rpi-firmware.mk
  ################################################################################
  
 -RPI_FIRMWARE_VERSION = 7f8ac8dac0b80291cbf5e56580139034a0a42070
-+RPI_FIRMWARE_VERSION = 89ec3757faaf564d519b44163fc2fd814eea407b.tar.gz
++RPI_FIRMWARE_VERSION = 89ec3757faaf564d519b44163fc2fd814eea407b
  RPI_FIRMWARE_SITE = $(call github,raspberrypi,firmware,$(RPI_FIRMWARE_VERSION))
  RPI_FIRMWARE_LICENSE = BSD-3c
  RPI_FIRMWARE_LICENSE_FILES = boot/LICENCE.broadcom
