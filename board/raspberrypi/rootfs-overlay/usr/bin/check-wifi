@@ -31,6 +31,6 @@ done
 dmesg | grep brcmfmac | tail -n 5 | grep "brcmf_cfg80211_escan: Connecting: status (3)" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     rmmod brcmfmac
-    modprobe
+    modprobe brcmfmac
     exit 1
 fi
