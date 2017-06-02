@@ -32,6 +32,8 @@ done
 ps | grep netplugd | grep -v grep > /dev/null 2>&1
 if [ $? -eq 1 ]; then
     $netplugd_init restart
+    $hostapd_init restart
+    exit 1
 fi
 
 dmesg | grep brcmfmac | tail -n 5 | grep "brcmf_cfg80211_escan: Connecting: status (3)" > /dev/null 2>&1
