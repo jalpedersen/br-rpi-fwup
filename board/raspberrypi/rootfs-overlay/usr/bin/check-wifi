@@ -36,17 +36,16 @@ if [ $? -eq 1 ]; then
     exit 1
 fi
 
-dmesg | grep brcmfmac | tail -n 5 | grep "brcmf_cfg80211_escan: Connecting: status (3)" > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    rmmod brcmfmac
-    modprobe brcmfmac
-    exit 1
-fi
+reset_brcmfmac() {
+    dmesg | grep brcmfmac | tail -n 5 | grep "$1" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        rmmod brcmfmac
+        modprobe brcmfmac
+        $hostapd_init restart
+        exit 1
+    fi
+}
 
-dmesg | grep brcmfmac | tail -n 5 | grep "brcmf_cfg80211_add_iface: iface validation failed: err=-16" > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    rmmod brcmfmac
-    modprobe brcmfmac
-    $hostapd_init restart
-    exit 1
-fi
+reset_brcmfmac "brcmf_cfg80211_escan: Connecting: status (3)"
+reset_brcmfmac "brcmf_cfg80211_add_iface: iface validation failed: err=-16"
+reset_brcmfmac "brcmf_fil_cmd_data: bus is down. we have nothing to do."
