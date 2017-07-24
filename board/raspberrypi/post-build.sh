@@ -11,7 +11,7 @@ env
 echo "Compiling overlays"
 overlaydir=$BINARIES_DIR/overlays
 mkdir -p $overlaydir
-dtc=$BUILD_DIR/linux-0926c07dec16ca75cc01c06201c19be7086d3a4b/scripts/dtc/dtc
+dtc=$BUILD_DIR/linux-983cf7a23cc3f286f4c22d360387a5bac298d37c/scripts/dtc/dtc
 
 for o in $BR2_EXTERNAL_FWUP_PATH/board/raspberrypi/overlays/*-overlay.dts; do
   if [ -f $o ]; then
