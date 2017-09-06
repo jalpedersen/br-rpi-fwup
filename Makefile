@@ -1,6 +1,6 @@
 TOPDIR := $(shell pwd)
 
-PROJECT_BR_VERSION = 2017.05.2
+PROJECT_BR_VERSION = 2017.08
 PROJECT_BR_URL = git://git.buildroot.net/buildroot
 PROJECT_DEFCONFIG = $(shell grep BR2_DEFCONFIG= buildroot/.config | sed -e 's/.*"\(.*\)"/\1/')
 
