@@ -4,8 +4,8 @@
  #
  #############################################################
  
--FWUP_VERSION = v0.14.3
-+FWUP_VERSION = v0.15.4
+-FWUP_VERSION = v0.15.4
++FWUP_VERSION = v0.18.0
  FWUP_SITE = $(call github,fhunleth,fwup,$(FWUP_VERSION))
  FWUP_LICENSE = Apache-2.0
  FWUP_LICENSE_FILES = LICENSE
@@ -14,44 +14,5 @@
 +++ b/package/fwup/fwup.hash	2017-03-09 21:23:57.315386429 +0000
 @@ -1,2 +1,3 @@
  # Locally calculated
- sha256 cf2e6ff729c21bc000dbe008211cf9d4901be9b42c82a06e4068deb638ea8f6e  fwup-v0.14.3.tar.gz
-+sha256 852e255bd65f9db473a06184abb3e94e3b6b86be7bf66169e8df8146d5966ae1  fwup-v0.15.4.tar.gz
---- a/package/fwup/0001-Fix-uclibc-build.patch	2017-09-07 09:12:35.000000000 +0200
-+++ b/package/fwup/0001-Fix-uclibc-build.patch	1970-01-01 01:00:00.000000000 +0100
-@@ -1,36 +0,0 @@
--From 0301cb4ffbf4705316ba017516745a535d66d552 Mon Sep 17 00:00:00 2001
--From: Bernd Kuhls <bernd.kuhls@t-online.de>
--Date: Sun, 28 May 2017 16:56:39 +0200
--Subject: [PATCH 1/1] Fix uclibc build
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Without sys/types.h the build breaks with errors like this:
--
--parse_file.h:28:5: error: unknown type name ‘off_t’
--     off_t *map;
--     ^
--
--Patch sent upstream: https://github.com/fhunleth/fwup/pull/61
--
--Signed-off-by: Bernd Kuhls <bernd.kuhls@t-online.de>
-----
-- src/sparse_file.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/src/sparse_file.h b/src/sparse_file.h
--index 21bf5f9..579fbaa 100644
----- a/src/sparse_file.h
--+++ b/src/sparse_file.h
--@@ -18,6 +18,7 @@
-- #define SPARSE_FILE_H
-- 
-- #include <confuse.h>
--+#include <sys/types.h>
-- 
-- struct sparse_file_map
-- {
---- 
--2.11.0
--
+ sha256 852e255bd65f9db473a06184abb3e94e3b6b86be7bf66169e8df8146d5966ae1  fwup-v0.15.4.tar.gz
++sha256 b186b2321f5a37d18b59b4346b69e26356915342cce5411ce2bf7ab02939c71d  fwup-v0.18.0.tar.gz
