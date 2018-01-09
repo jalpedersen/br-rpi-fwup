@@ -41,6 +41,7 @@ Vagrant.configure('2') do |config|
 	config.vm.provision 'shell', inline:
 		"sudo dpkg --add-architecture i386
 		sudo apt-get -q update
+		sudo apt-get -q -y install swig libpython-dev
 		sudo apt-get -q -y install git-core libssl-dev libssl-doc zlib1g-dev
 		sudo apt-get -q -y install build-essential libncurses5-dev \
 			git bzr cvs mercurial subversion libc6:i386 unzip
