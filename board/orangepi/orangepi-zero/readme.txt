@@ -1,10 +1,10 @@
-OrangePi One
+OrangePi Zero
 
 Intro
 =====
 
 This default configuration will allow you to start experimenting with the
-buildroot environment for the OrangePi One. With the current configuration
+buildroot environment for the OrangePi Zero. With the current configuration
 it will bring-up the board, and allow access through the serial console.
 
 How to build it
@@ -12,7 +12,7 @@ How to build it
 
 Configure Buildroot:
 
-    $ make orangepi_one_defconfig
+    $ make orangepi_zero_defconfig
 
 Compile everything and build the SD card image:
 
