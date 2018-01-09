@@ -32,7 +32,7 @@ echo;echo
 ##resource
 for dtb in $dtbs; do
 cat << EOF
-on-resource $dtb.dtb { fat_write(${BOOT_PART_OFFSET}, "$dtb.dtb.new") }
+on-resource $dtb.dtb { fat_write(\${BOOT_PART_OFFSET}, "$dtb.dtb.new") }
 EOF
 done
 echo;echo
