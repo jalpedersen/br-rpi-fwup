@@ -3,6 +3,7 @@
 NAME=ntpd
 DAEMON=/usr/sbin/$NAME
 NTP_SERVER=0.pool.ntp.org
+hwclock=/sbin/hwclock
 
 # Gracefully exit if the package has been removed.
 test -x $DAEMON || exit 0
@@ -17,7 +18,7 @@ case "$1" in
   start)
     printf "Starting $NAME: "
     /usr/bin/ntpdate -s $NTP_SERVER
-    [ $? = 0 ] && hwclock_wrapper -wu
+    [ $? = 0 ] && $hwclock -wu
     start-stop-daemon -S -q -x $DAEMON -- -g
     [ $? = 0 ] && echo "OK" || echo "FAIL"
     echo -n "Current time: "

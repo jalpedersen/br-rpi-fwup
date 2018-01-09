@@ -3,15 +3,16 @@
 module=rtc-ds1307
 address=0x68
 driver=ds1307
+hwclock=/sbin/hwclock
 
 case "$1" in
   start)
     modprobe $module
     echo $driver $address > /sys/class/i2c-adapter/i2c-1/new_device
-    hwclock_wrapper -su
+    $hwclock -su
     ;;
   stop)
-    hwclock_wrapper -wu
+    $hwclock -wu
     ;;
   restart|reload)
     $0 stop

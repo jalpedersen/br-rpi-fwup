@@ -9,10 +9,6 @@ set httpd unixsocket /var/run/monit.sock
 check filesystem datafs with path /data
   if space usage > 90% then alert
 
-check program check-wifi with path /usr/bin/check-wifi
-  every "* * * * *"
-  if status == 1 then alert
-
 check process runsvdir with pidfile /var/run/runsvdir.pid
   start program = "/etc/init.d/S92runsvdir start" with timeout 5 seconds
   stop program = "/etc/init.d/S92runsvdir stop"

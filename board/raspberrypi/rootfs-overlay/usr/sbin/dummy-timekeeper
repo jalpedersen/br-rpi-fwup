@@ -1,6 +1,0 @@
-#!/bin/sh
-file=/data/last-known-time
-while [ 1 ]; do
-    date +%s > $file
-    sleep 60
-done
