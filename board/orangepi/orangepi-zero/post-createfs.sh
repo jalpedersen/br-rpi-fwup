@@ -24,6 +24,7 @@ $HOST_DIR/usr/bin/mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
 
 # Build the firmware image (.fw file)
 echo "Creating firmware file..."
+PROJECT_GIT_REV=`git rev-parse --short HEAD` \
 PROJECT_ROOT=$BR2_EXTERNAL_FWUP_PATH $FWUP -v -c -f $FWUP_CONFIG -o $FW_PATH
 
 # Build a raw image that can be directly written to
