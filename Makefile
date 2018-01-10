@@ -3,6 +3,7 @@ TOPDIR := $(shell pwd)
 PROJECT_BR_VERSION = 2017.11.1
 PROJECT_BR_URL = git://git.buildroot.net/buildroot
 PROJECT_DEFCONFIG = $(shell grep BR2_DEFCONFIG= buildroot/.config | sed -e 's/.*"\(.*\)"/\1/')
+PROJECT_GIT_REV = $(shell git rev-parse --short HEAD)
 
 # Optional place to download files to so that they don't need
 # to be redownloaded when working a lot with buildroot
