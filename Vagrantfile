@@ -44,7 +44,8 @@ Vagrant.configure('2') do |config|
 		sudo apt-get -q -y install swig libpython-dev
 		sudo apt-get -q -y install git-core libssl-dev libssl-doc zlib1g-dev
 		sudo apt-get -q -y install build-essential libncurses5-dev \
-			git bzr cvs mercurial subversion libc6:i386 unzip
+			git bzr cvs mercurial subversion libc6:i386 unzip \
+			gcc-multilib g++-multilib
         sudo apt-get -q -y openjdk-7-jdk
 		sudo apt-get -q -y autoremove
 		sudo apt-get -q -y clean"
