@@ -1,6 +1,0 @@
-config BR2_PACKAGE_UHUBCTL
-    bool "uhubctl"
-    depends on BR2_PACKAGE_LIBUSB
-    help
-	Control USB hubs
-

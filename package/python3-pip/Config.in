@@ -1,0 +1,9 @@
+config BR2_PACKAGE_PYTHON_PIP
+    bool "python3-pip"
+    select BR2_PACKAGE_PYTHON3_PYEXPAT 
+    select BR2_PACKAGE_PYTHON3_SETUPTOOLS
+    depends on BR2_PACKAGE_PYTHON3
+    help
+      The PyPA recommended tool for installing Python packages.
+
+      https://pip.pypa.io/en/stable/index.html
