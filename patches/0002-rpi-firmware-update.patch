@@ -5,8 +5,8 @@ diff -Naur rpi-firmware.orig/rpi-firmware.mk rpi-firmware/rpi-firmware.mk
  #
  ################################################################################
  
--RPI_FIRMWARE_VERSION = 2067241bc7cdf238fdeab7f5a3c22faa57dd5617
-+RPI_FIRMWARE_VERSION = 983b091aa491dc6b47e5cc62abb281dbcb75088d
+-RPI_FIRMWARE_VERSION = 36f991382326907419f64917624427e59fd8e4a0
++RPI_FIRMWARE_VERSION = 78841788b5b1b0de25e7cd066ec0a9c177e7a086
  RPI_FIRMWARE_SITE = $(call github,raspberrypi,firmware,$(RPI_FIRMWARE_VERSION))
  RPI_FIRMWARE_LICENSE = BSD-3c
  RPI_FIRMWARE_LICENSE_FILES = boot/LICENCE.broadcom
@@ -16,5 +16,5 @@ diff -Naur rpi-firmware.org/rpi-firmware.hash rpi-firmware/rpi-firmware.hash
 +++ b/package/rpi-firmware/rpi-firmware.hash	2017-03-20 11:02:43.662515555 +0000
 @@ -1,2 +1,3 @@
  # Locally computed
- sha256 0451e1a843bf02df81126a1625d9a15dfdf19dcb2f9e95b0613a63e59fd31ca8 rpi-firmware-2067241bc7cdf238fdeab7f5a3c22faa57dd5617.tar.gz
-+sha256 a8a89daf5cc7f1ce342c97dba92305f95026b1c6d5e57cc2f11488307d619592 rpi-firmware-983b091aa491dc6b47e5cc62abb281dbcb75088d.tar.gz
+ sha256 ea451834e20136d249661e0ed7d1fdfa309249d233a387f44dd6c3b746a454c6 rpi-firmware-36f991382326907419f64917624427e59fd8e4a0.tar.gz
++sha256 49b88c0d719556c454a5dc4de504ccc36efa0c36cc93764e96fbcd2baab01385 rpi-firmware-78841788b5b1b0de25e7cd066ec0a9c177e7a086.tar.gz
