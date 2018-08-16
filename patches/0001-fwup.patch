@@ -5,7 +5,7 @@
  #############################################################
  
 -FWUP_VERSION = v0.15.4
-+FWUP_VERSION = v1.2.4
++FWUP_VERSION = v1.2.5
  FWUP_SITE = $(call github,fhunleth,fwup,$(FWUP_VERSION))
  FWUP_LICENSE = Apache-2.0
  FWUP_LICENSE_FILES = LICENSE
@@ -15,4 +15,4 @@
 @@ -1,2 +1,3 @@
  # Locally calculated
  sha256 852e255bd65f9db473a06184abb3e94e3b6b86be7bf66169e8df8146d5966ae1  fwup-v0.15.4.tar.gz
-+sha256 de4d182c1782a9dd13fad84edc1d4ea89db4c898422a57dff37f5727d9b178ce  fwup-v1.2.4.tar.gz
++sha256 20302dc96cef88438034e15551e178bb0652c28d99aa7ca5260100cb3bebbc2a  fwup-v1.2.5.tar.gz
