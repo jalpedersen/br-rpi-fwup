@@ -1,3 +1,3 @@
 #!/bin/sh
-version=v1.2.5
+version=v1.2.7
 wget https://github.com/fhunleth/fwup/archive/${version}/fwup-${version}.tar.gz
