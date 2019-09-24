@@ -1,0 +1,10 @@
+#!/bin/sh
+
+vendor=$(cat /sys/$DEVPATH/idVendor)
+product=$(cat /sys/$DEVPATH/idProduct)
+
+conf="/etc/usb_modeswitch.d/$vendor:$product"
+
+if [ -r "$conf" ]; then
+	usb_modeswitch -v 0x$vendor -p 0x$product -c /etc/usb_modeswitch.d/$vendor:$product
+fi
