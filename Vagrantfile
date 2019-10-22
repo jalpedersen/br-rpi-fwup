@@ -5,8 +5,8 @@
 ################################################################################
 
 ### Change here for more memory/cores ###
-VM_MEMORY=5120
-VM_CORES=1
+VM_MEMORY=8192
+VM_CORES=2
 
 Vagrant.configure('2') do |config|
 	config.vm.box = 'ubuntu/trusty64'
